@@ -7,20 +7,20 @@ public class Loan {
     private Long id;
     private User user;
     private Book book;
+
     private LocalDate loanDate;
+    private LocalDate dueDate;
     private LocalDate returnDate;
-    private boolean returned;
 
     public Loan() {
     }
 
-    public Loan(Long id, User user, Book book, LocalDate loanDate, LocalDate returnDate, boolean returned) {
+    public Loan(Long id, User user, Book book, LocalDate loanDate, LocalDate dueDate) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
-        this.returnDate = returnDate;
-        this.returned = returned;
+        this.dueDate = dueDate;
     }
 
     public Long getId() {
@@ -39,12 +39,16 @@ public class Loan {
         return loanDate;
     }
 
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
     public boolean isReturned() {
-        return returned;
+        return returnDate != null;
     }
 
     public void setUser(User user) {
@@ -59,22 +63,26 @@ public class Loan {
         this.loanDate = loanDate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public void setReturned(boolean returned) {
-        this.returned = returned;
+    public void returnBook() {
+        if (returnDate != null) {
+            throw new IllegalStateException("Book already returned");
+        }
+        this.returnDate = LocalDate.now();
     }
 
     @Override
     public String toString() {
         return "Loan{" +
-                "user=" + user.getName() +
-                ", book=" + book.getTitle() +
+                "id=" + id +
+                ", user=" + (user != null ? user.getName() : null) +
+                ", book=" + (book != null ? book.getTitle() : null) +
                 ", loanDate=" + loanDate +
+                ", dueDate=" + dueDate +
                 ", returnDate=" + returnDate +
-                ", returned=" + returned +
                 '}';
     }
 }
