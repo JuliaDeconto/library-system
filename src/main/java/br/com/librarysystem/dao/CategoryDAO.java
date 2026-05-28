@@ -35,14 +35,14 @@ public class CategoryDAO {
         }
     }
 
-    public Category findById(Long id) {
+    public Category findById(int id) {
 
         String sql = "SELECT * FROM category WHERE id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setLong(1, id);
+            statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -129,7 +129,7 @@ public class CategoryDAO {
 
     public void update(Category category) {
 
-        String sql = "UPDATE category SET name ? WHERE id = ?";
+        String sql = "UPDATE category SET name = ? WHERE id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

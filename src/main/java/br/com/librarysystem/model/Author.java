@@ -1,10 +1,11 @@
 package br.com.librarysystem.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Author {
 
-    private Long id;
+    private int id;
     private String name;
     private String nationality;
     private LocalDate birthDate;
@@ -12,14 +13,14 @@ public class Author {
     public Author() {
     }
 
-    public Author(Long id, String name, String nationality, LocalDate birthDate) {
+    public Author(int id, String name, String nationality, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.nationality = nationality;
         this.birthDate = birthDate;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -33,6 +34,10 @@ public class Author {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
